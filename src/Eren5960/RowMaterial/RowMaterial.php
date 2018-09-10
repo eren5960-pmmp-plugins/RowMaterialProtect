@@ -136,7 +136,6 @@ class RowMaterial extends PluginBase implements Listener {
 	public function onBreak(BlockBreakEvent $event): void{
 		$player = $event->getPlayer();
 		$block = $event->getBlock();
-		var_dump($this->inLevel($player), $this->inBlock($block), $this->hasPermission($player, $block));
 		if(!$this->inLevel($player)) return;
 
 		if($this->inBlock($block)){
