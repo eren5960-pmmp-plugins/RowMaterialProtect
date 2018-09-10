@@ -1,0 +1,25 @@
+# worlds
+levels:
+  - world
+  - world1
+  - etc
+
+# Please input english block name
+# permission format: "Diamond Block" => "area.diamond.block"
+blocks:
+  - Gold Ore
+  - Emerald Ore
+  - Iron Ore
+  - Coal Ore
+  - Diamond Ore
+  - Lapis Lazuli Ore
+  - Gold Block
+  - Emerald Block
+  - Iron Block
+  - Coal Block
+  - Diamond Block
+  - Lapis Lazuli Block
+  
+# popup, title, chat
+message-type: chat
+message: §cYou are not permission!
