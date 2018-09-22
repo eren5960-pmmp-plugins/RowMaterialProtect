@@ -13,57 +13,41 @@ use pocketmine\permission\Permission;
 use pocketmine\event\block\BlockBreakEvent;
 
 class RowMaterial extends PluginBase implements Listener {
-
 	/** @var Config[] */
 	protected $config = [];
 	/** @var string[] */
 	protected $levels = [];
 	/** @var string[] */
 	protected $blocks = [];
-
-	/**
-	 * @return void
-	 */
+	
 	public function onLoad(): void{
 		$this->initPermissions();
 	}
-
-	/**
-	 * @return void
-	 */
+	
 	public function onEnable(): void{
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
-		$this->initConfig();
-		$this->initLevels();
-		$this->initBlocks();
-		$this->getLogger()->info("\n§ewww.github.com/Eren5960\n§c Please follow §b@Eren5960 §cin github.\n");
+		$this->initPlugin();
 	}
 
-	/**
-	 * @return void
-	 */
+	public function initPlugin(): void{
+        $this->initConfig();
+        $this->initLevels();
+        $this->initBlocks();
+    }
+
 	private function initConfig(): void{
 		$this->saveDefaultConfig();
 		$this->config = (new Config($this->getDataFolder() . "config.yml", Config::YAML))->getAll();
 	}
-
-	/**
-	 * @return void
-	 */
+	
 	private function initLevels(): void{
 		$this->levels = $this->config["levels"];
 	}
-
-	/**
-	 * @return void
-	 */
+	
 	private function initBlocks(): void{
 		$this->blocks = $this->config["blocks"];
 	}
-
-	/**
-	 * @return void
-	 */
+	
 	private function initPermissions(): void{
 		$perms = [];
 		foreach ($this->blocks as $block) {
@@ -72,13 +56,13 @@ class RowMaterial extends PluginBase implements Listener {
 		Permission::loadPermissions($perms);
 	}
 
-	/**
-	 * @param string $blockname
-	 *
-	 * @return string
-	 */
-	private function getPermission(string $blockname): string{
-		return "area." . strtolower(str_replace(" ", ".", $blockname));
+    /**
+     * @param string $block_name
+     *
+     * @return string
+     */
+	private function getPermission(string $block_name): string{
+		return "area." . strtolower(str_replace(" ", ".", $block_name));
 	}
 
 	/**
@@ -101,7 +85,7 @@ class RowMaterial extends PluginBase implements Listener {
 
 	/**
 	 * @param Player $player
-	 * @param Block $block
+	 * @param Block  $block
 	 *
 	 * @return bool
 	 */
@@ -111,8 +95,6 @@ class RowMaterial extends PluginBase implements Listener {
 
 	/**
 	 * @param Player $player
-	 *
-	 * @return void
 	 */
 	public function sendMessage(Player $player): void{
 		$message = $this->config["message"];
@@ -121,7 +103,7 @@ class RowMaterial extends PluginBase implements Listener {
 				$player->sendPopup($message);
 				break;
 			case 'title':
-				$player->addTitle($message);
+				$player->addTitle($message, $this->config["sub-message"]);
 				break;
 			case 'chat':
 			default:

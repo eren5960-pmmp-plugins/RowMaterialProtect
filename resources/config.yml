@@ -23,3 +23,6 @@ blocks:
 # popup, title, chat
 message-type: chat
 message: §cYou are not permission!
+
+# only title type
+sub-message: ""
